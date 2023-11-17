@@ -1,0 +1,40 @@
+@startuml
+
+!pragma layout smetana
+'https://plantuml.com/class-diagram
+
+CustomerOrder o-- "1" Customer
+CustomerOrder *-- "1..*" OrderLine
+CustomerOrder *-- "0..*" Payment
+CustomerOrder *-- "1" OrderStatus
+
+OrderLine o-- CatalogItem
+
+'OrderStatus *-- OrderStatus.State
+
+abstract class Payment
+Payment <|-- CreditCard
+Payment <|-- SwiftTransfer
+
+
+class Customer {
+String email
+String firstname
+String lastname
+String address
+}
+
+class CustomerOrder {
+Date creationDate
+}
+
+class OrderStatus {
+}
+
+enum OrderStatus.State {
+  SUBMITTED
+  SHIPPED
+  DELIVERED
+}
+
+@enduml

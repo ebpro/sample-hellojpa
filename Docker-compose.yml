@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  db:
+    image: 'postgres:15.2-alpine'
+    environment:
+      - POSTGRES_USER=dba
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=ordermanager-db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ordermanager-pg-data:/var/lib/postgresql/data
+    networks:
+      - backend
+
+  app:
+    image: 'brunoe/ordermanager:latest'
+    build: .
+    depends_on:
+      - db
+    environment:
+      - DATASOURCE_URL=jdbc:postgresql://db:5432/ordermanager-db
+      - DATASOURCE_USERNAME=dba
+      - DATASOURCE_PASSWORD=secret
+    ports:
+      - "8088:8080"
+    networks:
+      - frontend
+      - backend
+
+volumes:
+  ordermanager-pg-data:
+
+networks:
+  frontend:
+  backend:
