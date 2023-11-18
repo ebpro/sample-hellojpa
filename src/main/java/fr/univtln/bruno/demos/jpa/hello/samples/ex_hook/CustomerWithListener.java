@@ -2,15 +2,17 @@ package fr.univtln.bruno.demos.jpa.hello.samples.ex_hook;
 
 import jakarta.persistence.*;
 import lombok.*;
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
 @Entity
-@Data
+@Table(name = "CUSTOMER_BIS")
+@EntityListeners(EntityMonitorListener.class)
+@Getter
+@Setter
+@ToString
 @RequiredArgsConstructor(staticName = "of")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "CUSTOMER_BIS")
-@Log
-@EntityListeners(EntityMonitorListener.class)
+@Slf4j
 public class CustomerWithListener {
     @Id
     @GeneratedValue

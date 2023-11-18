@@ -6,10 +6,12 @@ import lombok.*;
 import java.util.UUID;
 
 @Entity
-@Data
+@Table(name = "CUSTOMER", schema = "EX_UUID")
+@Getter
+@Setter
+@ToString
 @RequiredArgsConstructor(staticName = "of")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "CUSTOMER", schema = "EX_UUID")
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -18,5 +20,4 @@ public class Customer {
     @Column(length = 50, nullable = false)
     @NonNull
     private String name;
-
 }

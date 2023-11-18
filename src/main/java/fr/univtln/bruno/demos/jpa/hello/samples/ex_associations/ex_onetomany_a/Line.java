@@ -4,10 +4,12 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Data
+@Table(name = "LINE", schema = "EX_ONE_TO_MANY_A")
+@Getter
+@Setter
+@ToString
 @RequiredArgsConstructor(staticName = "of")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "LINE", schema = "EX_ONE_TO_MANY_A")
 public class Line {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

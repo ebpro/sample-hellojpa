@@ -2,14 +2,15 @@ package fr.univtln.bruno.demos.jpa.hello.samples.ex_hook;
 
 import jakarta.persistence.*;
 import lombok.*;
-import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 
 @Entity
-@Data
+@Table(name = "CUSTOMER", schema = "EX_HOOK")
+@Getter
+@Setter
+@ToString
 @RequiredArgsConstructor(staticName = "of")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "CUSTOMER", schema = "EX_HOOK")
 @Slf4j
 public class Customer {
     @Id

@@ -4,14 +4,15 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Data
+@Table(name = "CUSTOMER_BASE")
+@Getter
+@Setter
+@ToString
 @RequiredArgsConstructor(staticName = "of")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "CUSTOMER_BASE")
 public class CustomerBase {
     @Id
     @GeneratedValue
-    @NonNull
     private long id;
 
     @Column(length = 50, nullable = false)

@@ -7,10 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data
+@Table(name = "CUSTOMER", schema = "EX_MANY_TO_MANY")
+@Getter
+@Setter
+@ToString
 @RequiredArgsConstructor(staticName = "of")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "CUSTOMER", schema = "EX_MANY_TO_MANY")
 public class Customer {
     @Id
     @GeneratedValue

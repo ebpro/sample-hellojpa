@@ -4,16 +4,16 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 @Entity
+@Table(schema = "EX_HERITAGE1")
 @SuperBuilder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Data
-@Table(schema = "EX_HERITAGE1")
+@Getter
+@Setter
+@ToString
 public class Person {
     @Id
     @GeneratedValue

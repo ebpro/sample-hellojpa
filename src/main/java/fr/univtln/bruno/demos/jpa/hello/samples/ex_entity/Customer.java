@@ -7,13 +7,15 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Data
+@Table(name = "CUSTOMER",
+       indexes = {@Index(name = "idx_email", columnList = "email", unique = true)})
+@Getter
+@Setter
+@ToString
 @Builder
 @AllArgsConstructor
 @RequiredArgsConstructor(staticName = "of")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "CUSTOMER",
-       indexes = {@Index(name = "idx_email", columnList = "email", unique = true)})
 public class Customer {
     @Column(updatable = false)
     private final LocalDateTime creationDate = LocalDateTime.now();
@@ -38,6 +40,7 @@ public class Customer {
     private LocalDate birthDate;
     @Lob
     @Basic(fetch = FetchType.LAZY)
+    @ToString.Exclude
     private byte[] photo;
     //@Enumerated(EnumType.STRING)
     private Status status = Status.LEAD;
@@ -47,5 +50,4 @@ public class Customer {
     }
 
     enum Status {ACTIVE, LEAD}
-
 }

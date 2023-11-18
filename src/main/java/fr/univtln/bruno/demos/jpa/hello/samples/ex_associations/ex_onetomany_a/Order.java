@@ -1,17 +1,18 @@
 package fr.univtln.bruno.demos.jpa.hello.samples.ex_associations.ex_onetomany_a;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data
-@NoArgsConstructor
 @Table(name = "EORDER", schema = "EX_ONE_TO_MANY_A")
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -23,6 +24,7 @@ public class Order {
             cascade = {CascadeType.PERSIST,
                     CascadeType.REMOVE},
             orphanRemoval = true)
+    @ToString.Exclude
     private List<Line> lines = new ArrayList<>();
 
     public Order addLine(Line line) {

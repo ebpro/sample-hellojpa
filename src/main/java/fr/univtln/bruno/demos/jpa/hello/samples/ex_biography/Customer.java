@@ -4,10 +4,12 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Data
+@Table(name = "CUSTOMER", schema = "ex_biography")
+@Getter
+@Setter
+@ToString
 @RequiredArgsConstructor(staticName = "of")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "CUSTOMER", schema = "ex_biography")
 public class Customer {
     @Id
     @GeneratedValue
@@ -18,5 +20,6 @@ public class Customer {
     private String name;
 
     @Embedded
+    @Column()
     private Biography biography;
 }

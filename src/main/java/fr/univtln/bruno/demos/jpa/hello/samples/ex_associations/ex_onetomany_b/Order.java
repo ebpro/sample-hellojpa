@@ -8,11 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data
+@Table(name = "EORDER", schema = "EX_ONE_TO_MANY_B")
+@Getter
+@Setter
+@ToString
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "EORDER", schema = "EX_ONE_TO_MANY_B")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

@@ -2,7 +2,6 @@ package fr.univtln.bruno.demos.jpa.hello;
 
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;

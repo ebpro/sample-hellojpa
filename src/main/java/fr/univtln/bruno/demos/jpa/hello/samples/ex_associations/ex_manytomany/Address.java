@@ -6,10 +6,12 @@ import lombok.*;
 import java.util.List;
 
 @Entity
-@Data
+@Table(name = "ADDRESS", schema = "EX_MANY_TO_MANY")
+@Getter
+@Setter
+@ToString
 @RequiredArgsConstructor(staticName = "of")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "ADDRESS", schema = "EX_MANY_TO_MANY")
 public class Address {
     @Id
     @GeneratedValue
