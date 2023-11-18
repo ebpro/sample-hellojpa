@@ -49,11 +49,9 @@ public class TestManytoMany {
 
         try (EntityManager entityManager = DatabaseManager
                 .ENTITY_MANAGER_FACTORY.createEntityManager()) {
-
             entityManager
                     .find(Address.class, 1L)
                     .getOccupants()
-                    .stream()
                     .forEach(o->log.info("{}",o));
         }
 
