@@ -11,7 +11,7 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 public class Student extends Person {
-    enum Status {ACTIVE, ALUMNI}
+    public enum Status {ACTIVE, ALUMNI}
 
     private Status status;
 }
