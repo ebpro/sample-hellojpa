@@ -18,8 +18,8 @@ public class TestManytoMany {
         int nbAddresses = 3;
         int nbCustomers = 10;
 
-        try (EntityManager entityManager = DatabaseManager
-                .ENTITY_MANAGER_FACTORY.createEntityManager()) {
+        try (EntityManager entityManager = DatabaseManager.getInstance().getEntityManagerFactory()
+                .createEntityManager()) {
             entityManager.getTransaction().begin();
 
             TypedQuery<Address> query = entityManager.createQuery("""
@@ -47,8 +47,7 @@ public class TestManytoMany {
             entityManager.getTransaction().commit();
         }
 
-        try (EntityManager entityManager = DatabaseManager
-                .ENTITY_MANAGER_FACTORY.createEntityManager()) {
+        try (EntityManager entityManager = DatabaseManager.getInstance().getEntityManagerFactory().createEntityManager()) {
             entityManager
                     .find(Address.class, 1L)
                     .getOccupants()

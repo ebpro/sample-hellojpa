@@ -9,7 +9,7 @@ public class CustomerTest {
     public static void main(String[] args) {
         CustomerGenerator.generateCustomer(1000);
 
-        try (EntityManager anotherEntityManager = DatabaseManager.ENTITY_MANAGER_FACTORY.createEntityManager()) {
+        try (EntityManager anotherEntityManager = DatabaseManager.getInstance().getEntityManagerFactory().createEntityManager()) {
             log.info("{}",anotherEntityManager.find(Customer.class, 1L));
         }
 

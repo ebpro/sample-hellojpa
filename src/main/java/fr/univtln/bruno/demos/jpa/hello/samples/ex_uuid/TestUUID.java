@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 @Slf4j
 public class TestUUID {
     public static void main(String[] args) {
-        try (EntityManager entityManager = DatabaseManager.ENTITY_MANAGER_FACTORY.createEntityManager()) {
+        try (EntityManager entityManager = DatabaseManager.getInstance().getEntityManagerFactory().createEntityManager()) {
             entityManager.getTransaction().begin();
 
             Faker faker = new Faker();

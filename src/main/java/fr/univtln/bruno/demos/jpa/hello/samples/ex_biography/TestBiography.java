@@ -5,8 +5,7 @@ import jakarta.persistence.EntityManager;
 
 public class TestBiography {
     public static void main(String[] args) {
-        try (EntityManager entityManager = DatabaseManager
-                .ENTITY_MANAGER_FACTORY.createEntityManager()) {
+        try (EntityManager entityManager = DatabaseManager.getInstance().getEntityManagerFactory().createEntityManager()) {
             entityManager.getTransaction().begin();
             Customer customer = Customer.of("Jim");
             customer.setBiography(Biography.builder().brief("bla").extended("bla bla").build());

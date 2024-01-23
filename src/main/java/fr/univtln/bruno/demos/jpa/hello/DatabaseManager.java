@@ -4,39 +4,41 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Properties;
 
 @Slf4j
 public class DatabaseManager {
 
-    public static final EntityManagerFactory ENTITY_MANAGER_FACTORY;
+    private static final EntityManagerFactory ENTITY_MANAGER_FACTORY;
+    private static final DatabaseManager INSTANCE;
 
     static {
-        Map<String, String> env = System.getenv();
-        Map<String, Object> configOverrides = new HashMap<>();
+        INSTANCE = new DatabaseManager();
+        Properties configOverrides = new Properties();
 
-        String[][] configVariables = {
-                {"jakarta.persistence.jdbc.url", "jakarta.persistence.jdbc.url", "DATASOURCE_URL"},
-                {"jakarta.persistence.jdbc.user", "jakarta.persistence.jdbc.user", "DATASOURCE_USERNAME"},
-                {"jakarta.persistence.jdbc.password", "jakarta.persistence.jdbc.password", "DATASOURCE_PASSWORD"}
-        };
+        configOverrides.setProperty("jakarta.persistence.jdbc.url", System.getProperty("jakarta.persistence.jdbc.url", System.getenv("DATASOURCE_URL")));
+        configOverrides.setProperty("jakarta.persistence.jdbc.user", System.getProperty("jakarta.persistence.jdbc.user", System.getenv("DATASOURCE_USERNAME")));
+        configOverrides.setProperty("jakarta.persistence.jdbc.password", System.getProperty("jakarta.persistence.jdbc.password", System.getenv("DATASOURCE_PASSWORD")));
 
-        for (String[] config : configVariables) {
-            String property = System.getProperty(config[1]);
-            if (!(property == null || property.isBlank())) {
-                log.info("Override JPA config {} with system property {}", config[0], property);
-                configOverrides.put(config[0], System.getProperty(config[1]));
-            } else if (env.containsKey("DATASOURCE_URL")) {
-                log.info("Override JPA config {} with env variable {}", config[0], env.get(config[2]));
-                configOverrides.put(config[0], env.get(config[2]));
-            }
+        try {
+            ENTITY_MANAGER_FACTORY = Persistence.createEntityManagerFactory("hellojpa-pu", configOverrides);
+        } catch (Exception e) {
+            log.error("Failed to create EntityManagerFactory", e);
+            throw new ExceptionInInitializerError(e);
         }
-
-        ENTITY_MANAGER_FACTORY = Persistence.createEntityManagerFactory("hellojpa-pu", configOverrides);
     }
 
     private DatabaseManager() {
+        if (INSTANCE != null) {
+            throw new IllegalStateException("Already instantiated");
+        }
     }
 
+    public static DatabaseManager getInstance() {
+        return INSTANCE;
+    }
+
+    public EntityManagerFactory getEntityManagerFactory() {
+        return ENTITY_MANAGER_FACTORY;
+    }
 }

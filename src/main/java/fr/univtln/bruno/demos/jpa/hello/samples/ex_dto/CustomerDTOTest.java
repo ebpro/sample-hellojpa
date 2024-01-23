@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 public class CustomerDTOTest {
     public static void main(String[] args) {
 
-        try (EntityManager entityManager = DatabaseManager.ENTITY_MANAGER_FACTORY.createEntityManager()) {
+        try (EntityManager entityManager = DatabaseManager.getInstance().getEntityManagerFactory().createEntityManager()) {
             CustomerGenerator.generateCustomer(10);
             TypedQuery<CustomerDisplayDTO> query = entityManager.createQuery("""
                             SELECT new fr.univtln.bruno.demos.jpa.hello.samples.ex_dto.CustomerDisplayDTO(c.firstname, c.lastname)

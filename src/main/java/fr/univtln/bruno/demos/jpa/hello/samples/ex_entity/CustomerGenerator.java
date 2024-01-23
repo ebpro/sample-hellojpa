@@ -15,7 +15,7 @@ public class CustomerGenerator {
     private CustomerGenerator() {}
 
     public static void generateCustomer(int number) {
-        try (EntityManager entityManager = DatabaseManager.ENTITY_MANAGER_FACTORY.createEntityManager()) {
+        try (EntityManager entityManager = DatabaseManager.getInstance().getEntityManagerFactory().createEntityManager()) {
 
             TypedQuery<Boolean> checkEmail = entityManager
                     .createQuery("""

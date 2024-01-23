@@ -16,16 +16,14 @@ public class TestOnetoMany {
                 .line(Line.of("Moto", 8000))
                 .build();
 
-        try (EntityManager entityManager = DatabaseManager
-                .ENTITY_MANAGER_FACTORY.createEntityManager()) {
+        try (EntityManager entityManager = DatabaseManager.getInstance().getEntityManagerFactory().createEntityManager()) {
             entityManager.getTransaction().begin();
             entityManager.persist(order021);
             entityManager.persist(order022);
             entityManager.getTransaction().commit();
         }
 
-        try (EntityManager entityManager = DatabaseManager
-                .ENTITY_MANAGER_FACTORY.createEntityManager()) {
+        try (EntityManager entityManager = DatabaseManager.getInstance().getEntityManagerFactory().createEntityManager()) {
             log.info("{}",entityManager.find(Order.class, 1L));
         }
 
