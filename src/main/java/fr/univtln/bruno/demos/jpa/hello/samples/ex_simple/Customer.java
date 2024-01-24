@@ -9,6 +9,8 @@ import lombok.*;
 @RequiredArgsConstructor(staticName = "of")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Setter
+@ToString
+@Getter
 public class Customer {
     @Id
     @GeneratedValue
