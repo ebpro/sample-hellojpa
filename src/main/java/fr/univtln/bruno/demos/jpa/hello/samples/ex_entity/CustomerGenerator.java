@@ -3,11 +3,13 @@ package fr.univtln.bruno.demos.jpa.hello.samples.ex_entity;
 import fr.univtln.bruno.demos.jpa.hello.DatabaseManager;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
+import lombok.extern.slf4j.Slf4j;
 import net.datafaker.Faker;
 
 import java.util.Random;
 import java.util.stream.Stream;
 
+@Slf4j
 public class CustomerGenerator {
 
     private static Random random = new Random();
@@ -42,6 +44,8 @@ public class CustomerGenerator {
                     .forEach(entityManager::persist);
 
             entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            log.error("Failed to generate customers", e);
         }
     }
 }

@@ -37,7 +37,7 @@ public class Customer {
 
     @PostUpdate
     public void logPostUpdate() {
-        log.info("Removed: " + this);
+        log.info("Updated: " + this);
     }
 
     @PreRemove

@@ -4,7 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "CUSTOMER", schema = "EX_MANY_TO_MANY")
@@ -24,5 +25,15 @@ public class Customer {
     @ManyToMany
     @ToString.Exclude
     @JoinTable(schema = "EX_MANY_TO_MANY")
-    private List<Address> places = new ArrayList<>();
+    private Set<Address> places = new HashSet<>();
+
+    public void addPlace(Address address) {
+        this.places.add(address);
+        address.getOccupants().add(this);
+    }
+
+    public void removePlace(Address address) {
+        this.places.remove(address);
+        address.getOccupants().remove(this);
+    }
 }

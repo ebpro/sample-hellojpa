@@ -21,7 +21,16 @@ public class Line {
 
     @ManyToOne
     @JoinColumn(nullable = false)
-    @Setter
     @ToString.Exclude
     private Order order;
+
+    public void setOrder(Order order) {
+        if (this.order != null) {
+            this.order.getLines().remove(this);
+        }
+        this.order = order;
+        if (order != null) {
+            order.getLines().add(this);
+        }
+    }
 }

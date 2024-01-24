@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "EORDER", schema = "EX_ONE_TO_MANY_A")
@@ -25,7 +25,7 @@ public class Order {
                     CascadeType.REMOVE},
             orphanRemoval = true)
     @ToString.Exclude
-    private List<Line> lines = new ArrayList<>();
+    private Set<Line> lines = new HashSet<>();
 
     public Order addLine(Line line) {
         line.setOrder(this);

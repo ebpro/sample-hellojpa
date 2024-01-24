@@ -21,7 +21,11 @@ public class TestHeritage1 {
                 entityManager.persist(student);
                 entityManager.persist(teacher);
                 entityManager.getTransaction().commit();
+            } catch (Exception e) {
+                log.error("Failed to execute transaction", e);
             }
+        } catch (Exception e) {
+            log.error("Failed to create EntityManagerFactory", e);
         }
     }
 }

@@ -28,6 +28,8 @@ public class TestUUID {
                     .setMaxResults(5)
                     .getResultStream()
                     .forEach(o->log.info("{}",o));
+        } catch (Exception e) {
+            log.error("Failed to execute transaction", e);
         }
     }
 }

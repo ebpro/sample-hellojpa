@@ -3,7 +3,8 @@ package fr.univtln.bruno.demos.jpa.hello.samples.ex_associations.ex_manytomany;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "ADDRESS", schema = "EX_MANY_TO_MANY")
@@ -22,5 +23,16 @@ public class Address {
 
     @ManyToMany(mappedBy = "places")
     @ToString.Exclude
-    private List<Customer> occupants;
+    private Set<Customer> occupants= new HashSet<>();
+
+    public void addOccupant(Customer customer) {
+        this.occupants.add(customer);
+        customer.getPlaces().add(this);
+    }
+
+    public void removeOccupant(Customer customer) {
+        this.occupants.remove(customer);
+        customer.getPlaces().remove(this);
+    }
+
 }

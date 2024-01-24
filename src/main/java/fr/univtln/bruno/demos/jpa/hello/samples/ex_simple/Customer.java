@@ -6,7 +6,6 @@ import jakarta.persistence.Id;
 import lombok.*;
 
 @Entity
-@Data
 @RequiredArgsConstructor(staticName = "of")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Setter

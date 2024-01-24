@@ -37,17 +37,15 @@ public class Customer {
     @Transient
     private String displayName;
 
+    @Setter
     private LocalDate birthDate;
+
     @Lob
     @Basic(fetch = FetchType.LAZY)
     @ToString.Exclude
     private byte[] photo;
     //@Enumerated(EnumType.STRING)
     private Status status = Status.LEAD;
-
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
-    }
-
+    
     enum Status {ACTIVE, LEAD}
 }

@@ -7,12 +7,12 @@ import lombok.extern.slf4j.Slf4j;
 import net.datafaker.Faker;
 
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Stream;
 
 @Slf4j
 public class TestManytoMany {
     public static void main(String[] args) {
-        Random random = new Random();
         Faker faker = new Faker();
 
         int nbAddresses = 3;
@@ -35,7 +35,7 @@ public class TestManytoMany {
             Stream.generate(faker.name()::fullName)
                     .map(Customer::of)
                     .limit(nbCustomers)
-                    .forEach(c -> query.setMaxResults(random.nextInt(3) + 1)
+                    .forEach(c -> query.setMaxResults(ThreadLocalRandom.current().nextInt(3) + 1)
                             .getResultList()
                             .stream()
                             .map(a -> {
@@ -45,6 +45,8 @@ public class TestManytoMany {
                             .forEach(entityManager::persist));
 
             entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            log.error("Failed to execute transaction", e);
         }
 
         try (EntityManager entityManager = DatabaseManager.getInstance().getEntityManagerFactory().createEntityManager()) {
@@ -52,6 +54,8 @@ public class TestManytoMany {
                     .find(Address.class, 1L)
                     .getOccupants()
                     .forEach(o->log.info("{}",o));
+        } catch (Exception e) {
+            log.error("Failed to execute query", e);
         }
 
 

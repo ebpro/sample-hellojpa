@@ -20,12 +20,14 @@ public class TestOnetoMany {
             entityManager.persist(order1);
             entityManager.persist(order2);
             entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            log.error("Failed to execute transaction", e);
         }
 
         try (EntityManager entityManager = DatabaseManager.getInstance().getEntityManagerFactory().createEntityManager()) {
             log.info("{}",entityManager.find(Order.class, 1L));
+        } catch (Exception e) {
+            log.error("Failed to execute query", e);
         }
-
-
     }
 }
