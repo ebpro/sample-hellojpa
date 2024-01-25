@@ -27,6 +27,7 @@ public class Order {
                     CascadeType.REMOVE},
             orphanRemoval = true)
     @ToString.Exclude
+    @Singular
     private Set<Line> lines = new HashSet<>();
 
     public Order addLine(Line line) {
