@@ -12,17 +12,18 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
-    @Builder.Default
+
     private LocalDateTime date = LocalDateTime.now();
 
     @ElementCollection
     @Singular
     private List<Line> lines = new ArrayList<>();
+
 }

@@ -12,9 +12,7 @@ import java.util.Set;
 @Getter
 @Setter
 @ToString
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -27,7 +25,6 @@ public class Order {
                     CascadeType.REMOVE},
             orphanRemoval = true)
     @ToString.Exclude
-    @Singular
     private Set<Line> lines = new HashSet<>();
 
     public Order addLine(Line line) {
