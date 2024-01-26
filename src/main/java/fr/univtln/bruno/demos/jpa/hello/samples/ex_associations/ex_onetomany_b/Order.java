@@ -5,7 +5,9 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "EORDER", schema = "EX_ONE_TO_MANY_B")
@@ -20,10 +22,13 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
+    @Builder.Default
+    @Column(nullable = false)
     private LocalDateTime date = LocalDateTime.now();
 
     @ElementCollection
+    @CollectionTable(name = "LINE", schema = "EX_ONE_TO_MANY_B")
     @Singular
-    private List<Line> lines = new ArrayList<>();
+    private Set<Line> lines = new HashSet<>();
 
 }

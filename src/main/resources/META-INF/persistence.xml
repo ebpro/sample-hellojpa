@@ -15,9 +15,9 @@
                       value="H2" />
             <!--property name="jakarta.persistence.jdbc.driver"
                       value="org.h2.Driver" /-->
-            <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver" />
+            <!--property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver" /-->
             <property name="jakarta.persistence.jdbc.url"
-                      value="jdbc:h2:tcp://localhost/hellojpa-db" />
+                      value="jdbc:h2:tcp://localhost/~/hellojpa-db" />
             <property name="jakarta.persistence.jdbc.user"
                       value="dba" />
             <property name="jakarta.persistence.jdbc.password"

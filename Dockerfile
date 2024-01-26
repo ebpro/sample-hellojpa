@@ -4,6 +4,5 @@ COPY . ./
 RUN --mount=type=cache,target=/root/.m2 mvn clean verify
 
 FROM eclipse-temurin:17-jre-jammy
-EXPOSE 8080
 COPY --from=stage-build /app/target/*-jar-with-dependencies.jar /myapp.jar
 CMD ["java","-jar","/myapp.jar"]

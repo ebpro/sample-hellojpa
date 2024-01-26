@@ -4,34 +4,24 @@ services:
   db:
     image: 'postgres:15.2-alpine'
     environment:
-      - POSTGRES_USER=dba
-      - POSTGRES_PASSWORD=secret
-      - POSTGRES_DB=ordermanager-db
+      - POSTGRES_USER=${DATASOURCE_USERNAME:-dba}
+      - POSTGRES_PASSWORD=${DATASOURCE_PASSWORD:-secretsecret}
+      - POSTGRES_DB=${DATASOURCE_DB_NAME:-hellojpa-db}
     ports:
       - "5432:5432"
     volumes:
-      - ordermanager-pg-data:/var/lib/postgresql/data
-    networks:
-      - backend
+      - pg-data:/var/lib/postgresql/data
 
   app:
-    image: 'brunoe/ordermanager:latest'
+    image: 'brunoe/sample-hellojpa:latest'
     build: .
     depends_on:
       - db
     environment:
-      - DATASOURCE_URL=jdbc:postgresql://db:5432/ordermanager-db
-      - DATASOURCE_USERNAME=dba
-      - DATASOURCE_PASSWORD=secret
-    ports:
-      - "8088:8080"
-    networks:
-      - frontend
-      - backend
+      - DATASOURCE_USERNAME=${DATASOURCE_USERNAME:-dba}
+      - DATASOURCE_PASSWORD=${DATASOURCE_PASSWORD:-secretsecret}
+      - DATASOURCE_URL=${DATASOURCE_URL:-jdbc:postgresql://db/hellojpa-db}
 
 volumes:
-  ordermanager-pg-data:
+  pg-data:
 
-networks:
-  frontend:
-  backend:
