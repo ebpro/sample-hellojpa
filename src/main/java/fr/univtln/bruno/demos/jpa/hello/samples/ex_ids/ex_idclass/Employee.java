@@ -7,7 +7,7 @@ import jakarta.persistence.Table;
 
 @Entity(name="EmployeIdClass")
 @Table(name="EMPLOYE", schema = "EX_IDCLASS")
-@IdClass(EmployePK.class)
+@IdClass(EmployeePK.class)
 public class Employee {
     @Id
     private String department;

@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 @EqualsAndHashCode
 @Getter
-public class EmployePK implements Serializable {
+public class EmployeePK implements Serializable {
     @Id
     private String department;
     @Id
