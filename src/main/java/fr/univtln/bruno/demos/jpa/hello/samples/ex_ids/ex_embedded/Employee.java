@@ -6,6 +6,6 @@ import jakarta.persistence.*;
 @Table(name="EMPLOYE", schema = "EX_EMBEDDED_ID")
 public class Employee {
     @EmbeddedId
-    private EmployePK id;
+    private EmployeePK id;
     private String name;
 }

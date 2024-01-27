@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 @EqualsAndHashCode
 @Embeddable
-public class EmployePK implements Serializable {
+public class EmployeePK implements Serializable {
     private String department;
     private int rankInDepartment;
 }
