@@ -46,6 +46,9 @@ public class Customer {
     private byte[] photo;
     //@Enumerated(EnumType.STRING)
     private Status status = Status.LEAD;
-    
+
+    @Version
+    protected Integer version;
+
     enum Status {ACTIVE, LEAD}
 }
