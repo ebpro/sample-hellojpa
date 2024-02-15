@@ -38,7 +38,6 @@
 
             <!--property name="jakarta.persistence.schema-generation.create-database-schemas"
                       value="true" />
-
             <property name="jakarta.persistence.schema-generation.create-script-source"
                       value="sql/provided-create.ddl" />
             <property name="jakarta.persistence.schema-generation.drop-script-source"
