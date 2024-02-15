@@ -34,7 +34,7 @@ public class Order {
     }
 
     public Order removeLine(Line line) {
-        line.setOrder(this);
+        line.setOrder(null);
         lines.remove(line);
         return this;
     }
