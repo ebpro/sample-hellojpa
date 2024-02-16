@@ -12,8 +12,8 @@ import lombok.*;
 @ToString
 @Getter
 public class Customer {
-    @Id                                 //<2>
-    @GeneratedValue         //<2>
+    @Id                                 // <2>
+    @GeneratedValue         // <2>
     private long id;
 
     @NonNull                       // <3>
