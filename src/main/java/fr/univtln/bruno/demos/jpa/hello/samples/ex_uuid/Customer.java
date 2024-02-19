@@ -5,13 +5,14 @@ import lombok.*;
 
 import java.util.UUID;
 
-@Entity
-@Table(name = "CUSTOMER", schema = "EX_UUID")
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor(staticName = "of")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+
+@Entity
+@Table(name = "CUSTOMER", schema = "EX_UUID")
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

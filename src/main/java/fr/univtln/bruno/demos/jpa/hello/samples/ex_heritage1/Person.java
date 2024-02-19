@@ -7,13 +7,14 @@ import jakarta.persistence.Table;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-@Entity
-@Table(schema = "EX_HERITAGE1")
 @SuperBuilder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Setter
 @ToString
+
+@Entity
+@Table(schema = "EX_HERITAGE1")
 public class Person {
     @Id
     @GeneratedValue

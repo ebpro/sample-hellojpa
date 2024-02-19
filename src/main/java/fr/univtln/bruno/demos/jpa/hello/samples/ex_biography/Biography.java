@@ -8,10 +8,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
-@Embeddable
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
+
+@Embeddable
 public class Biography {
     @Column(name = "BIO_BRIEF")
     private String brief;

@@ -6,10 +6,11 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
-@Entity
 @SuperBuilder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString(callSuper = true)
+
+@Entity
 public class Teacher extends Person {
     private double salary;
 }

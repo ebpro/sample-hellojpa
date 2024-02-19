@@ -5,12 +5,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.*;
 
-@Entity                             // <1>
 @RequiredArgsConstructor(staticName = "of")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Setter
 @ToString
 @Getter
+
+@Entity                             // <1>
 public class Customer {
     @Id                                 // <2>
     @GeneratedValue         // <2>
@@ -20,5 +21,4 @@ public class Customer {
     private String email;
 
     private String name;
-
 }

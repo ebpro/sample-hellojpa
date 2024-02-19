@@ -3,17 +3,17 @@ package fr.univtln.bruno.demos.jpa.hello.samples.ex_associations.ex_manytomany;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
-@Table(name = "CUSTOMER", schema = "EX_MANY_TO_MANY")
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor(staticName = "of")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+
+@Entity
+@Table(name = "CUSTOMER", schema = "EX_MANY_TO_MANY")
 public class Customer {
     @Id
     @GeneratedValue

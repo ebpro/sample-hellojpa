@@ -4,12 +4,13 @@ import jakarta.persistence.Entity;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-@Entity
 @ToString(callSuper = true)
 @SuperBuilder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Setter
+
+@Entity
 public class Student extends Person {
     public enum Status {ACTIVE, ALUMNI}
 

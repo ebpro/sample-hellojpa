@@ -4,19 +4,18 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-@Entity
-@Table(name = "EORDER", schema = "EX_ONE_TO_MANY_B")
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 @Builder
 @AllArgsConstructor
+
+@Entity
+@Table(name = "EORDER", schema = "EX_ONE_TO_MANY_B")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

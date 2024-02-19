@@ -1,7 +1,6 @@
 package fr.univtln.bruno.demos.jpa.hello;
 
 import fr.univtln.bruno.demos.jpa.hello.samples.ex_entity.Customer;
-import fr.univtln.bruno.demos.jpa.hello.samples.ex_heritage1.Student;
 import jakarta.persistence.EntityManager;
 import lombok.extern.java.Log;
 
@@ -22,7 +21,7 @@ public class Main {
      * @throws IOException
      */
     public static void main(String[] args) throws IOException {
-        try (EntityManager entityManager = DatabaseManager.getInstance().getEntityManagerFactory().createEntityManager()) {
+        try (EntityManager entityManager = DatabaseManager.getEntityManagerFactory().createEntityManager()) {
             entityManager.getTransaction().begin();
             Customer customer = Customer.of("pierre.durand@ici.fr");
             customer.setFirstname("Pierre");

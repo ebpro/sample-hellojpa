@@ -4,6 +4,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 
 @Entity(name="EmployeIdClass")
 @Table(name="EMPLOYE", schema = "EX_IDCLASS")

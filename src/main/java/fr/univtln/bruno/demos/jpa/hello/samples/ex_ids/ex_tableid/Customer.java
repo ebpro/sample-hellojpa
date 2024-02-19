@@ -1,16 +1,15 @@
 package fr.univtln.bruno.demos.jpa.hello.samples.ex_ids.ex_tableid;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Entity(name = "CustomerTableId")
-@Table(name="CUSTOMER", schema = "EX_IDTABLE")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
+@Getter
+
+@Entity(name = "CustomerTableId")
+@Table(name="CUSTOMER", schema = "EX_IDTABLE")
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "customer_table_generator")

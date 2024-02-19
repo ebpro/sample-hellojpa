@@ -6,13 +6,14 @@ import lombok.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
-@Table(name = "ADDRESS", schema = "EX_MANY_TO_MANY")
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor(staticName = "of")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+
+@Entity
+@Table(name = "ADDRESS", schema = "EX_MANY_TO_MANY")
 public class Address {
     @Id
     @GeneratedValue

@@ -6,13 +6,14 @@ import jakarta.persistence.Table;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-@Entity(name="TeacherHeritage2")
-@Table(name="TEACHER", schema = "EX_HERITAGE2")
 @SuperBuilder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Setter
 @ToString(callSuper = true)
+
+@Entity(name="TeacherHeritage2")
+@Table(name="TEACHER", schema = "EX_HERITAGE2")
 public class Teacher extends Person {
 
     @Column(nullable = false)

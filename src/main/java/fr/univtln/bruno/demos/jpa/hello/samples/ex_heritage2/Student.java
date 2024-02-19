@@ -6,13 +6,14 @@ import jakarta.persistence.Table;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-@Entity(name="StudentHeritage2")
-@Table(name="STUDENT", schema = "EX_HERITAGE2")
 @SuperBuilder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Setter
 @ToString(callSuper = true)
+
+@Entity(name="StudentHeritage2")
+@Table(name="STUDENT", schema = "EX_HERITAGE2")
 public class Student extends Person {
     public enum Status {ACTIVE, ALUMNI}
 

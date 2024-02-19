@@ -4,9 +4,9 @@ services:
   db:
     image: 'postgres:15.2-alpine'
     environment:
-      - POSTGRES_USER=${DATASOURCE_USERNAME:-dba}
-      - POSTGRES_PASSWORD=${DATASOURCE_PASSWORD:-secretsecret}
-      - POSTGRES_DB=${DATASOURCE_DB_NAME:-hellojpa-db}
+      - POSTGRES_USER=${DB_USERNAME:-dba}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-secretsecret}
+      - POSTGRES_DB=${DB_NAME:-hellojpa-db}
     ports:
       - "5432:5432"
     volumes:
@@ -18,9 +18,9 @@ services:
     depends_on:
       - db
     environment:
-      - DATASOURCE_USERNAME=${DATASOURCE_USERNAME:-dba}
-      - DATASOURCE_PASSWORD=${DATASOURCE_PASSWORD:-secretsecret}
-      - DATASOURCE_URL=${DATASOURCE_URL:-jdbc:postgresql://db/hellojpa-db}
+      - DB_USERNAME=${DB_USERNAME:-dba}
+      - DB_PASSWORD=${DB_PASSWORD:-secretsecret}
+      - DB_URL=${DB_URL:-jdbc:postgresql://db/hellojpa-db}
 
 volumes:
   pg-data:
