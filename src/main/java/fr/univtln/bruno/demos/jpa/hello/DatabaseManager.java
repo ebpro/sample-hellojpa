@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import lombok.extern.slf4j.Slf4j;
 
+import javax.swing.text.html.Option;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
@@ -33,12 +34,14 @@ public class DatabaseManager {
             System.exit(1);
         }
 
-        //Override the jakarta persistence properties from the environment.
+        //Override the jakarta persistence properties from the environment, system properties or config file.
         Properties configOverrides = new Properties();
         Map.of("jakarta.persistence.jdbc.url", "DB_URL",
                         "jakarta.persistence.jdbc.user", "DB_USERNAME",
                         "jakarta.persistence.jdbc.password", "DB_PASSWORD")
-                .forEach((k,v)->configOverrides.setProperty(k, Optional.ofNullable(System.getenv(v)).orElse(configfileProperties.getProperty(v.toLowerCase().replace("_", ".")))));
+                .forEach((k,v)->configOverrides.setProperty(k, Optional.ofNullable(System.getenv(v))
+                            .orElse(Optional.ofNullable(System.getProperty(v.toLowerCase().replace("_", ".")))
+                                .orElse(configfileProperties.getProperty(v.toLowerCase().replace("_", "."))))));
         log.info("Connection to {} as {}", configOverrides.getProperty("jakarta.persistence.jdbc.url"), configOverrides.getProperty("jakarta.persistence.jdbc.user"));
 
         try {
