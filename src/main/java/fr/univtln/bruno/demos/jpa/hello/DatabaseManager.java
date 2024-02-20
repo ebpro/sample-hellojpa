@@ -39,9 +39,14 @@ public class DatabaseManager {
         Map.of("jakarta.persistence.jdbc.url", "DB_URL",
                         "jakarta.persistence.jdbc.user", "DB_USERNAME",
                         "jakarta.persistence.jdbc.password", "DB_PASSWORD")
-                .forEach((k,v)->configOverrides.setProperty(k, Optional.ofNullable(System.getenv(v))
-                            .orElse(Optional.ofNullable(System.getProperty(v.toLowerCase().replace("_", ".")))
-                                .orElse(configfileProperties.getProperty(v.toLowerCase().replace("_", "."))))));
+                .forEach((k,v)->{
+                    final String property = v.toLowerCase().replace("_", ".");
+                    log.info("looking for property {} in variable {} or in property {}", k, v, property);
+                    configOverrides.setProperty(k, Optional.ofNullable(System.getenv(v))
+                            .orElse(Optional.ofNullable(System.getProperty(property))
+                                    .orElse(configfileProperties.getProperty(property))));
+                });
+
         log.info("Connection to {} as {}", configOverrides.getProperty("jakarta.persistence.jdbc.url"), configOverrides.getProperty("jakarta.persistence.jdbc.user"));
 
         try {
