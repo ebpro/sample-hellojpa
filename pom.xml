@@ -23,7 +23,7 @@
         <assertj-core.version>3.25.3</assertj-core.version>
         <logback-classic.version>1.5.0</logback-classic.version>
         <jakarta.persistence-api.version>3.1.0</jakarta.persistence-api.version>
-        <postgresql.version>42.7.1</postgresql.version>
+        <postgresql.version>42.7.2</postgresql.version>
         <lombok.version>1.18.30</lombok.version>
         <datafaker.version>2.1.0</datafaker.version>
         <maven-shade-plugin.version>3.5.1</maven-shade-plugin.version>
