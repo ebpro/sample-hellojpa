@@ -26,12 +26,12 @@ public class DatabaseManager {
         try (InputStream input = DatabaseManager.class.getClassLoader().getResourceAsStream("config.properties")) {
             if (input == null) {
                 log.error("Sorry, unable to find config.properties");
-                System.exit(1);
+                throw new IllegalStateException("config.properties not found");
             }
             configfileProperties.load(input);
         } catch (IOException ex) {
             log.error("Sorry, unable to find config.properties: {}", ex.getMessage());
-            System.exit(1);
+            throw new IllegalStateException("Failed to load config.properties", ex);
         }
 
         //Override the jakarta persistence properties from the environment, system properties or config file.
@@ -41,9 +41,9 @@ public class DatabaseManager {
                         "jakarta.persistence.jdbc.password", "DB_PASSWORD")
                 .forEach((k,v)->{
                     final String property = v.toLowerCase().replace("_", ".");
-                    log.info("looking for property {} in variable {} or in property {}", k, v, property);
-                    log.info("System.getenv({})={}", v, System.getenv(v));
-                    log.info("System.getProperty({})={}", property, System.getProperty(property));
+                    log.debug("looking for property {} in variable {} or in property {}", k, v, property);
+                    log.debug("System.getenv({}) {}", v, Optional.ofNullable(System.getenv(v)).isPresent()? "found" : "not found");
+                    log.debug("System.getProperty({}) {}", property, Optional.ofNullable(System.getProperty(property)).isPresent()? "found" : "not found");
                     configOverrides.setProperty(k, Optional.ofNullable(System.getenv(v))
                             .orElse(Optional.ofNullable(System.getProperty(property))
                                     .orElse(configfileProperties.getProperty(property))));

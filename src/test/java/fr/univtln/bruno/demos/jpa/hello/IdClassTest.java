@@ -14,6 +14,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
     @BeforeEach
     public void setUp() {
+        System.setProperty("db.url", "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1");
+        System.setProperty("db.username", "sa");
+        System.setProperty("db.password", "");
         entityManager = DatabaseManager.getEntityManagerFactory().createEntityManager();
         entityManager.getTransaction().begin();
     }
