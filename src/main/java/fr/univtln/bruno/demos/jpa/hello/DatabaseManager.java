@@ -42,6 +42,8 @@ public class DatabaseManager {
                 .forEach((k,v)->{
                     final String property = v.toLowerCase().replace("_", ".");
                     log.info("looking for property {} in variable {} or in property {}", k, v, property);
+                    log.info("System.getenv({})={}", v, System.getenv(v));
+                    log.info("System.getProperty({})={}", property, System.getProperty(property));
                     configOverrides.setProperty(k, Optional.ofNullable(System.getenv(v))
                             .orElse(Optional.ofNullable(System.getProperty(property))
                                     .orElse(configfileProperties.getProperty(property))));
