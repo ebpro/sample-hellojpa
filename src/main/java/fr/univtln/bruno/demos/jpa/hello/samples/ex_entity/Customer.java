@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
        indexes = {@Index(name = "idx_email", columnList = "email", unique = true)})
 public class Customer {
     @Column(updatable = false)
-    private final LocalDateTime creationDate = LocalDateTime.now();
+    private LocalDateTime creationDate = LocalDateTime.now();
     @Id
     @Column(name = "ID")
     @GeneratedValue
@@ -44,7 +44,10 @@ public class Customer {
     @Lob
     @Basic(fetch = FetchType.LAZY)
     @ToString.Exclude
+
     private byte[] photo;
+
+    @Builder.Default
     //@Enumerated(EnumType.STRING)
     private Status status = Status.LEAD;
 

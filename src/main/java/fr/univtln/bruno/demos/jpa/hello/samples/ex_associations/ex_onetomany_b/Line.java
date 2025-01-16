@@ -7,7 +7,7 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor(staticName = "of")
+@AllArgsConstructor(staticName = "of")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 
 @Embeddable
@@ -15,6 +15,6 @@ import lombok.*;
 public class Line {
     @NonNull
     private String product;
-    @NonNull
+
     private double price;
 }

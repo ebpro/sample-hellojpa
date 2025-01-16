@@ -17,7 +17,8 @@ public class Line {
     private long id;
     @NonNull
     private String product;
-    @NonNull
+
+    @NonNull // just for requiredargsconstructor
     private double price;
 
     @ManyToOne

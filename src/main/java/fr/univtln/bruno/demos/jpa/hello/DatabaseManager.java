@@ -52,7 +52,7 @@ public class DatabaseManager {
         log.info("Connection to {} as {}", configOverrides.getProperty("jakarta.persistence.jdbc.url"), configOverrides.getProperty("jakarta.persistence.jdbc.user"));
 
         try {
-            ENTITY_MANAGER_FACTORY = Persistence.createEntityManagerFactory("hellojpa-pu", configOverrides);
+            ENTITY_MANAGER_FACTORY = Persistence.createEntityManagerFactory("hellojpaPU", configOverrides);
         } catch (Exception e) {
             log.error("Failed to create EntityManagerFactory", e);
             throw new ExceptionInInitializerError(e);
