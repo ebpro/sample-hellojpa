@@ -7,6 +7,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
  class OnetoManyBTest {
@@ -47,10 +48,15 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
         entityManager.flush();
         entityManager.clear();
 
-        // Fetch the persisted order from the database
-        Order fetchedOrder = entityManager.find(Order.class, 1L);
+        // Fetch the persisted orders from the database
+        Order fetchedOrder1 = entityManager.find(Order.class, order1.getId());
+        Order fetchedOrder2 = entityManager.find(Order.class, order2.getId());
 
-        // Assert that the fetched order is not null
-        assertNotNull(fetchedOrder);
+        // Assert that the fetched orders are not null
+        assertNotNull(fetchedOrder1);
+        assertNotNull(fetchedOrder2);
+
+        // Assert that the total number of lines is 4
+        assertEquals(4, fetchedOrder1.getLines().size() + fetchedOrder2.getLines().size());
     }
 }
