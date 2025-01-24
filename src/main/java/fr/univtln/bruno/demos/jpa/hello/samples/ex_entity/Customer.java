@@ -18,8 +18,10 @@ import java.time.LocalDateTime;
 @Table(name = "CUSTOMER",
        indexes = {@Index(name = "idx_email", columnList = "email", unique = true)})
 public class Customer {
+    @Builder.Default
     @Column(updatable = false)
     private LocalDateTime creationDate = LocalDateTime.now();
+    
     @Id
     @Column(name = "ID")
     @GeneratedValue
@@ -54,5 +56,5 @@ public class Customer {
     @Version
     protected Integer version;
 
-    enum Status {ACTIVE, LEAD}
+    public enum Status {ACTIVE, LEAD}
 }
