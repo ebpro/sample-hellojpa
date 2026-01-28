@@ -10,8 +10,33 @@
         <!-- The provider for the persistence unit -->
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <!-- The classes to be managed by the persistence unit -->
+        <!-- Explicitly list classes to ensure scanning picks them up -->
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
+        <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_associations.ex_manytomany.Customer</class>
+        <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_associations.ex_manytomany.Address</class>
+        <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_simple.Customer</class>
+        <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_entity.Customer</class>
+        <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_biography.Customer</class>
+        <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_uuid.Customer</class>
+        <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_hook.Customer</class>
+        <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_hook.CustomerWithListener</class>
+        <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_heritage1.Person</class>
+        <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_heritage1.Student</class>
+        <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_heritage1.Teacher</class>
+        <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_heritage2.Person</class>
+        <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_heritage2.Student</class>
+        <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_heritage2.Teacher</class>
+        <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_heritage3.Person</class>
+        <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_heritage3.Student</class>
+        <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_heritage3.Teacher</class>
+        <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_ids.ex_seqid.Customer</class>
+        <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_ids.ex_tableid.Customer</class>
+        <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_ids.ex_idclass.Employee</class>
+        <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_ids.ex_embedded.Employee</class>
+        <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_associations.ex_onetomany_a.Order</class>
+        <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_associations.ex_onetomany_a.Line</class>
+        <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_associations.ex_onetomany_b.Order</class>
+        <class>fr.univtln.bruno.demos.jpa.hello.samples.CustomerBase</class>
 
         <properties>
             <!-- database connection for Java SE -->
