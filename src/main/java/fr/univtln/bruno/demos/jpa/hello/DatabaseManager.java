@@ -25,50 +25,64 @@ public class DatabaseManager {
 
         Properties overrides = new Properties();
 
-        // Define the mapping between JPA keys and Environment variables
-        Map<String, String> propertyMap = Map.of(
-                "jakarta.persistence.jdbc.url", "DB_URL",
-                "jakarta.persistence.jdbc.user", "DB_USERNAME",
-                "jakarta.persistence.jdbc.password", "DB_PASSWORD");
+        // 1. Récupération des variables d'environnement avec valeurs par défaut
+        String dbName = getSetting("DB_NAME", "notebook-db", fileProps);
+        String dbUser = getSetting("DB_USERNAME", "dba", fileProps);
+        String dbPass = getSetting("DB_PASSWORD", "secretsecret", fileProps);
 
-        propertyMap.forEach((jpaKey, envVar) -> {
-            String sysProp = envVar.toLowerCase().replace("_", ".");
+        // Construction de l'URL par défaut si DB_URL n'est pas définie
+        String defaultUrl = "jdbc:postgresql://localhost/" + dbName;
+        String dbUrl = getSetting("DB_URL", defaultUrl, fileProps);
 
-            // Priority: Environment Variable > System Property (-D) > config.properties
-            String value = Optional.ofNullable(System.getenv(envVar))
-                    .orElse(Optional.ofNullable(System.getProperty(sysProp))
-                            .orElse(fileProps.getProperty(sysProp)));
+        log.info("Database settings: URL={}, User={}", dbUrl, dbUser);
 
-            if (value != null) {
-                overrides.setProperty(jpaKey, value);
+        // 2. Mapping vers les propriétés Jakarta Persistence
+        Map<String, String> jpaProperties = Map.of(
+                "jakarta.persistence.jdbc.url", dbUrl,
+                "jakarta.persistence.jdbc.user", dbUser,
+                "jakarta.persistence.jdbc.password", dbPass);
 
-                // Map to Hibernate-specific Hikari settings to ensure the pool uses the
-                // overrides
-                if (jpaKey.endsWith("url"))
-                    overrides.setProperty("hibernate.hikari.jdbcUrl", value);
-                if (jpaKey.endsWith("user"))
-                    overrides.setProperty("hibernate.hikari.username", value);
-                if (jpaKey.endsWith("password"))
-                    overrides.setProperty("hibernate.hikari.password", value);
-            }
+        jpaProperties.forEach((jpaKey, value) -> {
+            overrides.setProperty(jpaKey, value);
+
+            // Mapping vers Hibernate HikariCP
+            if (jpaKey.endsWith("url"))
+                overrides.setProperty("hibernate.hikari.jdbcUrl", value);
+            if (jpaKey.endsWith("user"))
+                overrides.setProperty("hibernate.hikari.username", value);
+            if (jpaKey.endsWith("password"))
+                overrides.setProperty("hibernate.hikari.password", value);
         });
 
-        // Set the pool provider
+        // 3. Configuration du Pool (HikariCP)
         overrides.setProperty("hibernate.connection.provider_class",
                 "org.hibernate.hikaricp.internal.HikariCPConnectionProvider");
-
-        // Pool defaults
         overrides.putIfAbsent("hibernate.hikari.maximumPoolSize", "10");
         overrides.putIfAbsent("hibernate.hikari.connectionTimeout", "30000");
 
-        log.info("Starting JPA with URL: {}", overrides.getProperty("jakarta.persistence.jdbc.url"));
+        log.info("Starting JPA with URL: {} and User: {}", dbUrl, dbUser);
 
         try {
+            // "hellojpaPU" doit correspondre au name dans votre persistence.xml
             ENTITY_MANAGER_FACTORY = Persistence.createEntityManagerFactory("hellojpaPU", overrides);
         } catch (Exception e) {
             log.error("Failed to create EntityManagerFactory", e);
             throw new ExceptionInInitializerError(e);
         }
+    }
+
+    /**
+     * Helper pour respecter la hiérarchie :
+     * 1. Variable d'environnement (ENV_VAR)
+     * 2. Propriété Système Java (env.var)
+     * 3. Fichier config.properties
+     * 4. Valeur par défaut
+     */
+    private static String getSetting(String envVar, String defaultValue, Properties fileProps) {
+        String sysProp = envVar.toLowerCase().replace("_", ".");
+        return Optional.ofNullable(System.getenv(envVar))
+                .orElse(Optional.ofNullable(System.getProperty(sysProp))
+                        .orElse(fileProps.getProperty(sysProp, defaultValue)));
     }
 
     public static EntityManagerFactory getEntityManagerFactory() {

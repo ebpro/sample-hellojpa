@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <persistence xmlns="https://jakarta.ee/xml/ns/persistence"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_1.xsd"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence
+                                 https://jakarta.ee/xml/ns/persistence/persistence_3_1.xsd"
              version="3.1">
 
     <persistence-unit name="hellojpaPU" transaction-type="RESOURCE_LOCAL">
-        <description>Production-ready Hello JPA Persistence Unit</description>
+        <description>Hello JPA – Hibernate + PostgreSQL</description>
+
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <!-- Explicitly list classes to ensure scanning picks them up -->
+        <!-- We explicitly list entities -->
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
 
+        <!-- ===== ENTITIES ===== -->
         <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_associations.ex_manytomany.Customer</class>
         <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_associations.ex_manytomany.Address</class>
         <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_simple.Customer</class>
@@ -19,45 +22,69 @@
         <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_uuid.Customer</class>
         <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_hook.Customer</class>
         <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_hook.CustomerWithListener</class>
+
         <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_heritage1.Person</class>
         <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_heritage1.Student</class>
         <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_heritage1.Teacher</class>
+
         <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_heritage2.Person</class>
         <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_heritage2.Student</class>
         <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_heritage2.Teacher</class>
+
         <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_heritage3.Person</class>
         <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_heritage3.Student</class>
         <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_heritage3.Teacher</class>
+
         <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_ids.ex_seqid.Customer</class>
         <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_ids.ex_tableid.Customer</class>
         <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_ids.ex_idclass.Employee</class>
         <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_ids.ex_embedded.Employee</class>
+
         <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_associations.ex_onetomany_a.Order</class>
         <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_associations.ex_onetomany_a.Line</class>
         <class>fr.univtln.bruno.demos.jpa.hello.samples.ex_associations.ex_onetomany_b.Order</class>
+
         <class>fr.univtln.bruno.demos.jpa.hello.samples.CustomerBase</class>
 
-<properties>
-    <property name="hibernate.connection.provider_class" value="org.hibernate.hikaricp.internal.HikariCPConnectionProvider" />
-    <property name="hibernate.hikari.dataSource.url" value="jdbc:postgresql://db:5432/hellojpa-db" />
-    <property name="hibernate.hikari.dataSource.user" value="dba" />
-    <property name="hibernate.hikari.dataSource.password" value="secretsecret" />
+        <!-- ===== CONFIGURATION ===== -->
+        <properties>
 
-    <property name="jakarta.persistence.schema-generation.create-source" value="script-then-metadata" />
-    <property name="jakarta.persistence.schema-generation.drop-source" value="script-then-metadata" />
-    <property name="jakarta.persistence.schema-generation.create-script-source" value="sql/provided-create.ddl" />
-    <property name="jakarta.persistence.schema-generation.drop-script-source" value="sql/provided-drop.ddl" />
-    <property name="jakarta.persistence.schema-generation.create-database-schemas" value="true" />
+            <!-- JDBC (Hibernate will use HikariCP automatically) -->
+            <property name="jakarta.persistence.jdbc.url"
+                      value="jdbc:postgresql://db:5432/hellojpa-db"/>
+            <property name="jakarta.persistence.jdbc.user" value="dba"/>
+            <property name="jakarta.persistence.jdbc.password" value="secretsecret"/>
 
-    <!--property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" /-->
-    <property name="hibernate.jdbc.batch_size" value="25" />
-    <property name="hibernate.order_inserts" value="true" />
-    <property name="hibernate.order_updates" value="true" />
+            <!-- Schema generation (demo/teaching setup) -->
+            <property name="jakarta.persistence.schema-generation.database.action"
+                      value="drop-and-create"/>
 
-    <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create" />
-    <property name="hibernate.format_sql" value="true" />
-    <property name="hibernate.highlight_sql" value="true" />
-    <property name="jakarta.persistence.sql-load-script-source" value="sql/provided-data.sql" />
-</properties>
+            <property name="jakarta.persistence.schema-generation.create-source"
+                      value="script-then-metadata"/>
+            <property name="jakarta.persistence.schema-generation.drop-source"
+                      value="script-then-metadata"/>
+
+            <property name="jakarta.persistence.schema-generation.create-script-source"
+                      value="sql/provided-create.ddl"/>
+            <property name="jakarta.persistence.schema-generation.drop-script-source"
+                      value="sql/provided-drop.ddl"/>
+
+            <property name="jakarta.persistence.sql-load-script-source"
+                      value="sql/provided-data.sql"/>
+
+            <property name="jakarta.persistence.schema-generation.create-database-schemas"
+                      value="true"/>
+
+            <!-- Hibernate behavior / tuning -->
+            <property name="hibernate.jdbc.batch_size" value="25"/>
+            <property name="hibernate.order_inserts" value="true"/>
+            <property name="hibernate.order_updates" value="true"/>
+
+            <!-- SQL logging -->
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.highlight_sql" value="true"/>
+
+        </properties>
+
     </persistence-unit>
 </persistence>

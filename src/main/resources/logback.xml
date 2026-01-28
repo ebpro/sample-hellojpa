@@ -10,6 +10,7 @@
 
     <logger name="org.hibernate.SQL" level="WARN" />
     <logger name="org.hibernate.orm.jdbc.bind" level="WARN" />
+    <logger name="org.hibernate.orm.jdbc.warn" level="ERROR" />
 
     <logger name="fr.univtln.bruno" level="DEBUG" />
 
