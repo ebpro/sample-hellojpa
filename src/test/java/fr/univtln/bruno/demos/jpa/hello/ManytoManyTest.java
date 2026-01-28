@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @Slf4j
- class ManytoManyTest {
+class ManytoManyTest {
     private EntityManager entityManager;
     private Faker faker;
 
@@ -35,7 +35,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
     }
 
     @Test
-     void testManyToManyRelationship() {
+    void testManyToManyRelationship() {
         int nbAddresses = 3;
         int nbCustomers = 10;
 

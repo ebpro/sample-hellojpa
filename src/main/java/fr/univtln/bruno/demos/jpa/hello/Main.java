@@ -13,7 +13,6 @@ import java.time.LocalDate;
 @Log
 public class Main {
 
-
     /**
      * Main method.
      *
